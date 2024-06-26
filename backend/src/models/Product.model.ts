@@ -1,3 +1,5 @@
+// Modelo productos
+
 import { Table, Column, Model, DataType, Default } from 'sequelize-typescript' // Importamos los decoradores
 
 @Table({
