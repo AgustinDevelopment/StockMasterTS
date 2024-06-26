@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "lib": ["esnext"],
+        "strict": false,
+        "sourceMap": true, // Genera los mapas
+        "esModuleInterop": true, // Importar librerias commonjs
+        "declaration": true // Genera archivos de definicion
+    },
+
+    "include": ["src/**/*.ts"] // Archivos a incluir en la compilacion
+}
