@@ -18,7 +18,7 @@ class Product extends Model {
     })
     price: number
 
-    @Default(true)
+    @Default(true) 
     @Column({
         type: DataType.BOOLEAN
     })
