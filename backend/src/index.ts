@@ -1,7 +1,10 @@
 // Archivo principal
 
 import server from "./server";
+import colors from 'colors'
 
-server.listen(4000, () => {
-    console.log('Backend en el pueto 4000')
+const port = process.env.PORT || 4000
+
+server.listen(port, () => {
+    console.log(colors.bgCyan(`REST API en el puesto ${port}`))
 })
