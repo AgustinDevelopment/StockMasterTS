@@ -1,5 +1,5 @@
 // Configuracion del servidor
 
 export function sumar() {
-    console.log(2+2)
+    console.log(2+3)
 }
