@@ -6,7 +6,23 @@ const server = express()
 
 // Routing
 server.get('/', (req, res) => {
-    res.send('Hola')
+    res.json('desde get')
+})
+
+server.post('/', (req, res) => {
+    res.json('desde post')
+})
+
+server.put('/', (req, res) => {
+    res.json('desde put')
+})
+
+server.patch('/', (req, res) => {
+    res.json('desde patch')
+})
+
+server.delete('/', (req, res) => {
+    res.json('desde delete')
 })
 
 export default server
