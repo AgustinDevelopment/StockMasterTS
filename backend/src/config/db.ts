@@ -1,5 +1,8 @@
 import { Sequelize } from "sequelize";
+import dotenv from 'dotenv'
 
-const db = new Sequelize('postgresql://rest_api_node_typescript_bzzm_user:15bwgkwAlBjAR9klZaj5VlHaYQTgIPvw@dpg-cplghn7109ks73dsedvg-a.oregon-postgres.render.com/rest_api_node_typescript_bzzm?ssl=true')
+dotenv.config()
+
+const db = new Sequelize(process.env.DATABASE_URL!)
 
 export default db
