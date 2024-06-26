@@ -1,28 +1,12 @@
 // Configuracion del servidor
 
 import express from 'express'
+import router from './router'
 
 const server = express()
 
-// Routing
-server.get('/', (req, res) => {
-    res.json('desde get')
-})
+server.use('/api/products', router)
 
-server.post('/', (req, res) => {
-    res.json('desde post')
-})
 
-server.put('/', (req, res) => {
-    res.json('desde put')
-})
-
-server.patch('/', (req, res) => {
-    res.json('desde patch')
-})
-
-server.delete('/', (req, res) => {
-    res.json('desde delete')
-})
 
 export default server
