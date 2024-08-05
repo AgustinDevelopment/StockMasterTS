@@ -50,19 +50,19 @@ export const updateProduct = async(req : Request, res : Response) => {
     
     // Comprobar que el producto exista
     const { id } = req.params
-        const product = await Product.findByPk(id)
+    const product = await Product.findByPk(id)
 
-        if(!product) {
-            return res.status(404).json({
-                error: 'Producto No Encontrado'
-            })
-        }
+    if(!product) {
+        return res.status(404).json({
+            error: 'Producto No Encontrado'
+        })
+    }
 
-        // Actualizar
-        await product.update(req.body)
-        await product.save()
+    // Actualizar
+    await product.update(req.body)
+    await product.save()
     
-        res.json({data: product})
+    res.json({data: product})
 
 }
 
@@ -71,18 +71,35 @@ export const updateAvailability = async(req : Request, res : Response) => {
 
     // Comprobar que el producto exista
     const { id } = req.params
-        const product = await Product.findByPk(id)
+    const product = await Product.findByPk(id)
 
-        if(!product) {
-            return res.status(404).json({
-                error: 'Producto No Encontrado'
-            })
-        }
+    if(!product) {
+        return res.status(404).json({
+            error: 'Producto No Encontrado'
+        })
+    }
 
-        // Actualizar
-        product.availability = !product.dataValues.availability // Obtener el valor de disponibilidad e invertir el valor
-        await product.save()
+    // Actualizar
+    product.availability = !product.dataValues.availability // Obtener el valor de disponibilidad e invertir el valor
+    await product.save()
     
-        res.json({data: product})
+    res.json({data: product})
 
+}
+
+// Borrar un producto
+export const deleteProduct = async(req : Request, res : Response) => {
+
+    // Comprobar que el producto exista
+    const { id } = req.params
+    const product = await Product.findByPk(id)
+
+    if(!product) {
+        return res.status(404).json({
+            error: 'Producto No Encontrado'
+        })
+    }
+
+    await product.destroy()
+    res.json({data: 'Producto eliminado'})
 }
