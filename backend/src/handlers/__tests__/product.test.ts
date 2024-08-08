@@ -57,6 +57,12 @@ describe('POST /api/products', () => {
 //Test GET
 describe('GET /api/products', () => {
 
+    test('Check if api/products url exists', async () => {
+        const response = await request(server).get('/api/products') // Almacenamosla solicitud HTTP usando supertest
+
+        expect(response.status).not.toBe(404) // Verificamos que el codigo de estado no sea 404
+    })
+
     test('GET a JSON response with products', async () => {
         const response = await request(server).get('/api/products') // Almacenamosla solicitud HTTP usando supertest
 
