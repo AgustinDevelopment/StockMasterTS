@@ -109,6 +109,19 @@ describe('GET /api/products/:id', () => {
 // TEST PUT
 describe('PUT /api/products/:id', () => {
 
+    test('Check a valid ID in the URL', async() => {
+        const response = await request(server).put('/api/products/not-valid-url').send({ // Almacenamosla solicitud HTTP usando supertest
+            name : "TEST PUT",
+            availability : true,
+            price : 100
+        }) 
+
+        expect(response.status).toBe(400) // Verificamos que el codigo de estado sea 400
+        expect(response.body).toHaveProperty('errors') // Verificamos que la respuesta tenga la propiedad error
+        expect(response.body.errors).toHaveLength(1) // Verificamos que la propiedad tenga la longitud de 1
+        expect(response.body.errors[0].msg).toBe('ID no valido') // Verificamos que el mensaje sea 'ID no valido'
+    })
+
     test('Display validation error messages when updating a product', async () => { 
         const response = await request(server).put('/api/products/1').send({}) // Almacenamosla solicitud HTTP usando supertest (actualizacion vacia)
 
