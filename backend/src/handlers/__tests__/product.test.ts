@@ -76,3 +76,17 @@ describe('GET /api/products', () => {
     })
 })
 
+//TEST GET for ID
+describe('GET /api/products/:id', () => {
+
+    test('Return a 404 response for a non-existent products', async () => { 
+        const productId = 3000 // Creamos una constante para el ID
+        const response = await request(server).get(`/api/products/${productId}`) // Almacenamosla solicitud HTTP usando supertest
+
+        expect(response.status).toBe(404) // Verificamos que el código de estado sea 404
+        expect(response.body).toHaveProperty('error') // Verificamos que la respuesta tenga la propiedad error
+        expect(response.body.error).toBe("Producto No Encontrado") // Verificamos que el mensaje de error sea "Producto No Encontrado"
+    })
+
+})
+
