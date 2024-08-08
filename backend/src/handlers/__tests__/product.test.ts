@@ -151,7 +151,21 @@ describe('PUT /api/products/:id', () => {
         expect(response.body).not.toHaveProperty('data') // No esperamos que tenga la propiedad data
     })
 
-    
+    test('Return a 404 response for a non-existent product', async () => { 
+        const productId = 3000 
+        const response = await request(server).put(`/api/products/${productId}`).send({ // Almacenamosla solicitud HTTP usando supertest 
+            name : "TEST PUT",
+            availability : true,
+            price : 100
+        }) 
+
+        expect(response.status).toBe(404) // Verificamos que el código de estado sea 404
+        expect(response.body.error).toBe('Producto No Encontrado') // Verificamos que el mensaje de error sea el mismo
+
+        // Contraparte
+        expect(response.status).not.toBe(200) // No esperamos codigo de estado 200
+        expect(response.body).not.toHaveProperty('data') // No esperamos que tenga la propiedad data
+    })
 
 })
 
