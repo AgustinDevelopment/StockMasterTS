@@ -167,5 +167,20 @@ describe('PUT /api/products/:id', () => {
         expect(response.body).not.toHaveProperty('data') // No esperamos que tenga la propiedad data
     })
 
+    test('Update an existing product with valid data', async () => { 
+        const response = await request(server).put(`/api/products/1`).send({ // Almacenamosla solicitud HTTP usando supertest 
+            name : "TEST PUT",
+            availability : true,
+            price : 100
+        }) 
+
+        expect(response.status).toBe(200) // Verificamos que el código de estado sea 200 
+        expect(response.body).toHaveProperty('data') // Verificamos que tenga la propiedad data
+
+        // Contraparte
+        expect(response.status).not.toBe(400) // No esperamos codigo de estado 400
+        expect(response.body).not.toHaveProperty('errors') // No esperamos que tenga la propiedad errors
+    })
+
 })
 
