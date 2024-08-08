@@ -54,7 +54,7 @@ describe('POST /api/products', () => {
     })
 })
 
-//Test GET
+// Test GET
 describe('GET /api/products', () => {
 
     test('Check if api/products url exists', async () => {
@@ -76,7 +76,7 @@ describe('GET /api/products', () => {
     })
 })
 
-//TEST GET for ID
+// TEST GET for ID
 describe('GET /api/products/:id', () => {
 
     test('Return a 404 response for a non-existent products', async () => { 
@@ -102,6 +102,23 @@ describe('GET /api/products/:id', () => {
 
         expect(response.status).toBe(200) // Verificamos que el codigo de estado sea 200
         expect(response.body).toHaveProperty('data') // Verificamos que la respuesta tenga la propiedad data
+    })
+
+})
+
+// TEST PUT
+describe('PUT /api/products/:id', () => {
+
+    test('Display validation error messages when updating a product', async () => { 
+        const response = await request(server).put('/api/products/1').send({}) // Almacenamosla solicitud HTTP usando supertest (actualizacion vacia)
+
+        expect(response.status).toBe(400) // Verificamos que el código de estado sea 400
+        expect(response.body).toHaveProperty('errors') // Verificamos que tenga la propiedad de erros
+        expect(response.body.errors).toHaveLength(5) // Verificamos que la propiedad tenga una longitud de 5
+
+        // Contraparte
+        expect(response.status).not.toBe(200) // No esperamos codigo de estado 200
+        expect(response.body).not.toHaveProperty('data') // No esperamos que tenga la propiedad data
     })
 
 })
