@@ -20,7 +20,7 @@ describe('POST /api/products', () => {
 
     // Testear que el precio sea mayor a cero
     test('validate that the price is greater than 0', async () => {
-        const response = await request(server).post('/api/products').send({ // Almacenamosla solicitud HTTP usando supertest (producto vacio)
+        const response = await request(server).post('/api/products').send({ // Almacenamosla solicitud HTTP usando supertest
             // Enviamos el objeto JSON
             name: 'Producto - Test',
             price: 0
@@ -53,3 +53,20 @@ describe('POST /api/products', () => {
         expect(response.body).not.toHaveProperty('errors') // Comprobamos que no hayan errores
     })
 })
+
+//Test GET
+describe('GET /api/products', () => {
+
+    test('GET a JSON response with products', async () => {
+        const response = await request(server).get('/api/products') // Almacenamosla solicitud HTTP usando supertest
+
+        expect(response.status).toBe(200) // Esperamos codigo de estado 200 (solicitud exitosa)
+        expect(response.headers['content-type']).toMatch(/json/) // Verificamos que la respuesta sea del tipo JSON
+        expect(response.body).toHaveProperty('data') // Verificamos que lo respuesta tenga la propiedad data
+        expect(response.body.data).toHaveLength(1) // La propiedad data tenga longitud de 1
+
+        // Contraparte
+        expect(response.body).not.toHaveProperty('errors') // Verificamos que la respuesta no tenga la propiedad de errores
+    })
+})
+
