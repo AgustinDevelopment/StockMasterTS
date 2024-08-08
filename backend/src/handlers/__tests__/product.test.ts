@@ -121,5 +121,24 @@ describe('PUT /api/products/:id', () => {
         expect(response.body).not.toHaveProperty('data') // No esperamos que tenga la propiedad data
     })
 
+    test('Validate that the price is greater than 0', async () => { 
+        const response = await request(server).put('/api/products/1').send({ // Almacenamosla solicitud HTTP usando supertest 
+            name : "TEST PUT",
+            availability : true,
+            price : 0
+        }) 
+
+        expect(response.status).toBe(400) // Verificamos que el código de estado sea 400
+        expect(response.body).toHaveProperty('errors') // Verificamos que tenga la propiedad de erros
+        expect(response.body.errors).toHaveLength(1) // Verificamos que la propiedad tenga una longitud de 1
+        expect(response.body.errors[0].msg).toBe('El precio debe ser mayor a cero') // Verificamos que el mensaje de error sea el mismo
+
+        // Contraparte
+        expect(response.status).not.toBe(200) // No esperamos codigo de estado 200
+        expect(response.body).not.toHaveProperty('data') // No esperamos que tenga la propiedad data
+    })
+
+    
+
 })
 
