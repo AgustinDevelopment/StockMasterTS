@@ -188,12 +188,25 @@ describe('PUT /api/products/:id', () => {
 describe('DELETE /api/products/:id', () => {
 
     test('Check a valid ID', async () => {
-        const response = await request(server).delete('/api/products/not-valid-id')
+        const response = await request(server).delete('/api/products/not-valid-id') // Almacenamosla solicitud HTTP usando supertest
 
-        expect(response.status).toBe(400)
-        expect(response.body).toHaveProperty('errors')
-        expect(response.body.errors[0].msg).toBe('ID no valido')
+        expect(response.status).toBe(400) // Verificamos que el codido de estado sea 400
+        expect(response.body).toHaveProperty('errors') // Verificamos que tengamos la propiedad de 'errors'
+        expect(response.body.errors[0].msg).toBe('ID no valido') // Verificamos que el mensaje de error sea 'ID no valido'
     })
+
+    test('Return a 404 response for a non-existing product', async () => {
+        const productId = 3000
+        const response = await request(server).delete(`/api/products/${productId}`) // Almacenamos la solicitud HTTP usando supertest
+
+        expect(response.status).toBe(404) // Verificamos que el codido de estado sea 404
+        expect(response.body.error).toBe('Producto No Encontrado') // Verificamos que el mensaje sea 'Producto No Encontrado'
+
+        // Contraparte
+        expect(response.status).not.toBe(200) // Verificamos que el codido de estado no sea 200
+    })
+
+    
 
 
 
