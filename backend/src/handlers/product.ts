@@ -4,45 +4,33 @@ import Product from '../models/Product.model'
 // Obtener Productos
 export const getProducts = async(req : Request, res : Response) => {
     
-    try {
-        const products = await Product.findAll({
-            // attributes: {exclude: ['createdAt', 'updatedAt', 'availability']}
-        })
-        res.json({data: products}) // Retornamos el producto
-    } catch (error) {
-        console.log(error)
-    }
+    const products = await Product.findAll({
+        // attributes: {exclude: ['createdAt', 'updatedAt', 'availability']}
+    })
+    res.json({data: products}) // Retornamos el producto
 }
 
 // Obtener Producto por ID
 export const getProductById = async(req : Request, res : Response) => {
 
-    try {
-        const { id } = req.params
-        const product = await Product.findByPk(id)
+    const { id } = req.params
+    const product = await Product.findByPk(id)
 
-        if(!product) {
-            return res.status(404).json({
-                error: 'Producto No Encontrado'
-            })
-        }
-
-        res.json({data: product})
-    } catch (error) {
-        console.log(error)
+    if(!product) {
+        return res.status(404).json({
+            error: 'Producto No Encontrado'
+        })
     }
+
+    res.json({data: product})
 
 }
 
 // Crear Producto
 export const createProduct = async(req : Request, res : Response) => {
 
-    try {
-        const product = await Product.create(req.body) // Almacenar el Producto en la BD
-        res.status(201).json({data: product})
-    } catch (error) {
-        console.log(error)
-    }
+    const product = await Product.create(req.body) // Almacenar el Producto en la BD
+    res.status(201).json({data: product})
 }
 
 // Actualizar Producto
