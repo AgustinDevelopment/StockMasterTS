@@ -88,5 +88,14 @@ describe('GET /api/products/:id', () => {
         expect(response.body.error).toBe("Producto No Encontrado") // Verificamos que el mensaje de error sea "Producto No Encontrado"
     })
 
+    test('Check a valid ID in the URL', async() => {
+        const response = await request(server).get('/api/products/not-valid-url') // Almacenamosla solicitud HTTP usando supertest
+
+        expect(response.status).toBe(400) // Verificamos que el codigo de estado sea 400
+        expect(response.body).toHaveProperty('errors') // Verificamos que la respuesta tenga la propiedad error
+        expect(response.body.errors).toHaveLength(1) // Verificamos que la propiedad tenga la longitud de 1
+        expect(response.body.errors[0].msg).toBe('ID no valido') // Verificamos que el mensaje sea 'ID no valido'
+    })
+
 })
 
