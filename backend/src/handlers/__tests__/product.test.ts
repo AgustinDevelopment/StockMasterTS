@@ -97,5 +97,12 @@ describe('GET /api/products/:id', () => {
         expect(response.body.errors[0].msg).toBe('ID no valido') // Verificamos que el mensaje sea 'ID no valido'
     })
 
+    test('Get a JSON response for a single product', async() => {
+        const response = await request(server).get('/api/products/1') // Almacenamosla solicitud HTTP usando supertest
+
+        expect(response.status).toBe(200) // Verificamos que el codigo de estado sea 200
+        expect(response.body).toHaveProperty('data') // Verificamos que la respuesta tenga la propiedad data
+    })
+
 })
 
