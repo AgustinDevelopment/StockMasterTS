@@ -206,6 +206,17 @@ describe('DELETE /api/products/:id', () => {
         expect(response.status).not.toBe(200) // Verificamos que el codido de estado no sea 200
     })
 
+    test('Delete a product', async () => {
+        const response = await request(server).delete('/api/products/1') // Almacenamosla solicitud HTTP usando supertest
+ 
+        expect(response.status).toBe(200) // Verificamos que el codido de estado sea 200
+        expect(response.body.data).toBe('Producto eliminado') // Verificamos que el mensaje sea 'Producto eliminado'
+
+        // Contraparte
+        expect(response.status).not.toBe(404) // Verificamos que el codido de estado no sea 404
+        expect(response.status).not.toBe(400) // Verificamos que el codido de estado no sea 400
+    })
+
     
 
 
