@@ -199,7 +199,18 @@ describe('PATCH /api/products/:id', () => {
         expect(response.body).not.toHaveProperty('data') // Verificamos que la respuesta no tenga la propiedad data
     })
 
-    
+    test('Update the product availability', async() => {
+        const response = await request(server).patch('/api/products/1') // Almacenamosla solicitud HTTP usando supertest
+
+        expect(response.status).toBe(200) // Verificamos que el codigo de estado sea 200
+        expect(response.body).toHaveProperty('data') // Verificamos que la respuesta tenga la propiedad data
+        expect(response.body.data.availability).toBe(false) // Verificamos que la availability pase a ser false
+
+        // Contraparte
+        expect(response.status).not.toBe(404) // Verificamos que el codigo de estado no sea 404
+        expect(response.status).not.toBe(400) // Verificamos que el codigo de estado no sea 400
+        expect(response.body).not.toHaveProperty('error') // Verificamos que no tenemos la propiedad de 'error'
+    })
 
 })
 
