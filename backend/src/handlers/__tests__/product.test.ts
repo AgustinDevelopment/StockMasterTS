@@ -184,6 +184,25 @@ describe('PUT /api/products/:id', () => {
 
 })
 
+// TEST PATCH
+describe('PATCH /api/products/:id', () => {
+
+    test('Return a 404 response for a non-existing product', async () => {
+        const productId = 3000
+        const response = await request(server).patch(`/api/products/${productId}`) // Almacenamosla solicitud HTTP usando supertest
+
+        expect(response.status).toBe(404) // Verificamos que el codigo de estado sea 404
+        expect(response.body.error).toBe('Producto No Encontrado') // Verificamos que el mensaje de error sea 'Producto No Entonctrado'
+
+        // Contraparte
+        expect(response.status).not.toBe(200) // Verificamos que el codigo de estado no sea 200
+        expect(response.body).not.toHaveProperty('data') // Verificamos que la respuesta no tenga la propiedad data
+    })
+
+    
+
+})
+
 // TEST DELETE
 describe('DELETE /api/products/:id', () => {
 
