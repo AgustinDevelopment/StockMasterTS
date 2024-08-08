@@ -184,3 +184,18 @@ describe('PUT /api/products/:id', () => {
 
 })
 
+// TEST DELETE
+describe('DELETE /api/products/:id', () => {
+
+    test('Check a valid ID', async () => {
+        const response = await request(server).delete('/api/products/not-valid-id')
+
+        expect(response.status).toBe(400)
+        expect(response.body).toHaveProperty('errors')
+        expect(response.body.errors[0].msg).toBe('ID no valido')
+    })
+
+
+
+})
+
