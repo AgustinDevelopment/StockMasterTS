@@ -3,7 +3,10 @@
 import express from 'express'
 import colors from 'colors'
 import cors, { CorsOptions } from 'cors'
+<<<<<<< HEAD
 import morgan from 'morgan'
+=======
+>>>>>>> 13451de70f2c61e5976a614c8a1fe8de5da405e3
 import router from './router'
 import db from './config/db'
 
