@@ -1,4 +1,4 @@
-import { DraftProductSchema } from "../types"
+import { DraftProductSchema, ProductsSchema } from "../types"
 import { safeParse } from "valibot"
 import axios from "axios"
 
@@ -21,6 +21,23 @@ export async function addProduct(data : ProductData) {
             })
         } else {
             throw new Error('Los datos ingresados no son validos')
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getProducts() {
+    try {
+        const url = 'http://localhost:4000/api/products'
+        const { data } = await axios(url)
+        const result = safeParse(ProductsSchema, data.data)
+        
+        if(result.success) {
+            return result.output
+        } else {
+            throw new Error('Error al obtener los productos')
         }
 
     } catch (error) {
