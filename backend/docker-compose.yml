@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend: 
+    build:
+      context: .  # Directorio del Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+      - API_NAME=${API_NAME}
+      - API_USER=${API_USER}
+      - API_PASS=${API_PASS}
+    volumes:
+      - .:/usr/src/app  # Montar el directorio actual en el contenedor
+    command: ["npm", "dev"]  # Comando para iniciar la aplicación
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
+
+networks:
+  default:
+    driver: bridge
