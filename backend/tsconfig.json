@@ -14,5 +14,8 @@
         "emitDecoratorMetadata": true
     },
 
+   
+
+
     "include": ["src/**/*.ts"] // Archivos a incluir en la compilacion
 }

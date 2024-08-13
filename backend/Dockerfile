@@ -1,23 +1,23 @@
-FROM node:14
+# Usa una imagen base de Node.js
+FROM node:18
 
-# Configuración del directorio de trabajo
-WORKDIR /src/index
+# Crea y define el directorio de trabajo
+WORKDIR /usr/src/app
 
-# Instalación de dependencias
+# Copia los archivos del proyecto al contenedor
 COPY package*.json ./
 RUN npm install
 
-# Creación de un usuario super root
 RUN useradd -ms /bin/bash nodejs
 
-# Cambio al usuario super root
 USER nodejs
 
-# Copia de la aplicación
+# Copia el resto de los archivos del proyecto al contenedor
 COPY . .
 
-# Exposición del puerto
+
+# Expone el puerto en el que la aplicación se ejecutará
 EXPOSE 4000
 
-# Comando de inicio
-CMD ["npm", "start"]
+# Define el comando para ejecutar la aplicación
+CMD ["npx", "ts-node", "src/index.ts"]

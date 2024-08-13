@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   backend: 
@@ -16,7 +16,7 @@ services:
       - API_PASS=${API_PASS}
     volumes:
       - .:/usr/src/app  # Montar el directorio actual en el contenedor
-    command: ["npm", "dev"]  # Comando para iniciar la aplicación
+    command: ["npm", "start"]  # Comando para iniciar la aplicación
 
   db:
     image: postgres:15
