@@ -1,10 +1,11 @@
 import { DraftProductSchema, ProductsSchema, Product, ProductSchema } from "../types"
-import { safeParse } from "valibot"
-import axios from "axios"
+import { safeParse, number, string, transform, pipe, parse } from 'valibot';
+import axios from "axios";
 
 type ProductData = {
     [k: string]: FormDataEntryValue;
 }
+
 
 export async function addProduct(data : ProductData) {
     try {
@@ -59,5 +60,38 @@ export async function getProductsById(id: Product['id']) {
 
     } catch (error) {
         console.log(error)
+    }
+}
+
+export async function updateProduct(data: ProductData, id: Product['id']) {
+    try {
+        // Define un esquema de número con transformación
+        const NumberSchema = pipe(
+            string(),
+            transform((value) => {
+                const num = Number(value);
+                if (isNaN(num)) {
+                    throw new Error('Invalid number');
+                }
+                return num;
+            }),
+            number()
+        );
+
+        const result = safeParse(ProductSchema, {
+            id,
+            name: data.name,
+            price: parse(NumberSchema, data.price.toString()),
+            availability: data.availability.toString() === 'true', // Convierte a booleano
+        });
+
+        if (result.success) {
+            const url = `http://localhost:4000/api/products/${id}`;
+            await axios.put(url, result.output);
+        } else {
+            throw new Error('Los datos ingresados no son válidos');
+        }
+    } catch (error) {
+        console.log('Error in updateProduct:', error);
     }
 }
