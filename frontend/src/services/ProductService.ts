@@ -104,3 +104,14 @@ export async function deleteProduct(id: Product['id']) {
         console.log(error)
     }
 }
+
+export async function updateProductAvailability(id: Product['id']) {
+
+    try {
+        const url = `http://localhost:4000/api/products/${id}`;
+        await axios.patch(url)
+    } catch (error) {
+        console.log(error)
+    }
+
+}
