@@ -95,3 +95,12 @@ export async function updateProduct(data: ProductData, id: Product['id']) {
         console.log('Error in updateProduct:', error);
     }
 }
+
+export async function deleteProduct(id: Product['id']) {
+    try {   
+        const url = `http://localhost:4000/api/products/${id}`;
+        await axios.delete(url)
+    } catch (error) {
+        console.log(error)
+    }
+}
