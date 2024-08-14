@@ -30,7 +30,7 @@ export default function ProductForm({product} : ProductFormProps) {
                 id="price"
                 type="number"
                 className="mt-2 block w-full p-3 bg-gray-50"
-                placeholder="Precio Producto. ej. 200, 300"
+                placeholder="Precio Producto"
                 name="price"
                 defaultValue={product?.price}
                 

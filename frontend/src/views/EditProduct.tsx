@@ -50,10 +50,10 @@ export default function EditProduct() {
   return (
     <>
       <div className='flex justify-between'>
-            <h2 className='text-4xl font-black text-slate-700'>Editar Producto</h2>
+            <h2 className='text-4xl font-black text-slate-900'>Editar Producto</h2>
             <Link
                 to="/"
-                className='rounded-md bg-slate-600 p-3 text-sm font-bold text-white shadow-sm hover:bg-slate-500'
+                className='rounded-md bg-slate-900 p-3 text-sm font-bold text-white shadow-sm hover:bg-slate-700'
             >
                 Volver a Producto
             </Link>
@@ -89,7 +89,7 @@ export default function EditProduct() {
 
         <input
           type="submit"
-          className="mt-5 w-full bg-slate-600 p-2 text-white font-bold text-lg cursor-pointer rounded"
+          className="mt-5 w-full bg-slate-900 p-2 text-white font-bold text-lg cursor-pointer rounded"
           value="Actualizar Producto"
         />
       </Form>
